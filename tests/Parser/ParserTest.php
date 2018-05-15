@@ -23,6 +23,8 @@ class ParserTest extends TestCase
     {
         $data = $this->getParser()->parse();
         $this->assertCount(8, $data->getGroups());
+        $this->assertSame('a', $data->getGroups()[0]->getId());
+        $this->assertSame('Group A', $data->getGroups()[0]->getName());
     }
 
     public function testGroups(): void

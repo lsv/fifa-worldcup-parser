@@ -67,7 +67,8 @@ class Parser
         $sorting = 0;
         foreach ((array) $this->dataArray['groups'] as $id => $value) {
             $groups[] = (new Model\Group())
-                ->setName($id)
+                ->setId($id)
+                ->setName($value['name'])
                 ->setSorting(++$sorting)
                 ->setWinner($value['winner'] ? $data->findTeamById($value['winner']) : null)
                 ->setRunnerup($value['runnerup'] ? $data->findTeamById($value['runnerup']) : null)

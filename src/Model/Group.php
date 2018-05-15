@@ -7,6 +7,11 @@ class Group
     /**
      * @var string
      */
+    private $id;
+
+    /**
+     * @var string
+     */
     private $name;
 
     /**
@@ -28,6 +33,17 @@ class Group
      * @var int
      */
     private $sorting;
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     public function getName(): string
     {
