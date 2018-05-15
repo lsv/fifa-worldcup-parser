@@ -20,12 +20,12 @@ class Data
     private $teams;
 
     /**
-     * @var Groups
+     * @var Group[]
      */
     private $groups;
 
     /**
-     * @var KnockoutRounds
+     * @var KnockoutRound[]
      */
     private $knockoutRounds;
 
@@ -120,38 +120,46 @@ class Data
     }
 
     /**
-     * @return Groups
+     * @return Group[]
      */
-    public function getGroups(): Groups
+    public function getGroups(): array
     {
-        return $this->groups;
+        $rounds = $this->groups;
+        usort($rounds, function (Group $a, Group $b) {
+            return $a->getSorting() <=> $b->getSorting();
+        });
+        return $rounds;
     }
 
     /**
-     * @param Groups $groups
+     * @param Group[] $groups
      *
      * @return $this
      */
-    public function setGroups(Groups $groups): self
+    public function setGroups(array $groups): self
     {
         $this->groups = $groups;
         return $this;
     }
 
     /**
-     * @return KnockoutRounds
+     * @return KnockoutRound[]
      */
-    public function getKnockoutRounds(): KnockoutRounds
+    public function getKnockoutRounds(): array
     {
-        return $this->knockoutRounds;
+        $rounds = $this->knockoutRounds;
+        usort($rounds, function (KnockoutRound $a, KnockoutRound $b) {
+            return $a->getSorting() <=> $b->getSorting();
+        });
+        return $rounds;
     }
 
     /**
-     * @param KnockoutRounds $knockoutRounds
+     * @param KnockoutRound[] $knockoutRounds
      *
      * @return $this
      */
-    public function setKnockoutRounds(KnockoutRounds $knockoutRounds): self
+    public function setKnockoutRounds(array $knockoutRounds): self
     {
         $this->knockoutRounds = $knockoutRounds;
         return $this;

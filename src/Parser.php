@@ -61,34 +61,35 @@ class Parser
         return $this->buildObjects($this->dataArray['teams'], Model\Team::class);
     }
 
-    protected function parseGroups(Model\Data $data): Model\Groups
+    protected function parseGroups(Model\Data $data): array
     {
-        $groups = new Model\Groups();
+        $groups = [];
+        $sorting = 0;
         foreach ((array) $this->dataArray['groups'] as $id => $value) {
-            $groups->addGroup(
-                (new Model\Group())
-                    ->setName($id)
-                    ->setWinner($value['winner'] ? $data->findTeamById($value['winner']) : null)
-                    ->setRunnerup($value['runnerup'] ? $data->findTeamById($value['runnerup']) : null)
-                    ->setMatches($this->buildMatches($data, $value['matches'], Model\GroupMatch::class))
-            );
+            $groups[] = (new Model\Group())
+                ->setName($id)
+                ->setSorting(++$sorting)
+                ->setWinner($value['winner'] ? $data->findTeamById($value['winner']) : null)
+                ->setRunnerup($value['runnerup'] ? $data->findTeamById($value['runnerup']) : null)
+                ->setMatches($this->buildMatches($data, $value['matches'], Model\GroupMatch::class))
+            ;
         }
         return $groups;
     }
 
-    protected function parseKnockouts(Model\Data $data): Model\KnockoutRounds
+    protected function parseKnockouts(Model\Data $data): array
     {
-        $rounds = new Model\KnockoutRounds();
+        $rounds = [];
         $sorting = 0;
         foreach ((array) $this->dataArray['knockout'] as $id => $value) {
-            $rounds->addKnockoutRound(
-                (new Model\KnockoutRound())
+            $rounds[] = (new Model\KnockoutRound())
                 ->setId($id)
                 ->setSorting(++$sorting)
                 ->setName($value['name'])
                 ->setMatches($this->buildMatches($data, $value['matches'], Model\KnockoutMatch::class, true))
-            );
+            ;
         }
+
         return $rounds;
     }
 

@@ -22,53 +22,53 @@ class ParserTest extends TestCase
     public function testLiveFile(): void
     {
         $data = $this->getParser()->parse();
-        $this->assertCount(8, $data->getGroups()->getGroups());
+        $this->assertCount(8, $data->getGroups());
     }
 
     public function testGroups(): void
     {
         $data = $this->getParser('notstarted.json')->parse();
-        $this->assertCount(8, $data->getGroups()->getGroups());
+        $this->assertCount(8, $data->getGroups());
     }
 
     public function testWinnerShouldBeATeam(): void
     {
         $data = $this->getParser('groupa_finished.json')->parse();
-        $this->assertInstanceOf(Team::class, $data->getGroups()->getGroups()[0]->getWinner());
-        $this->assertSame('Russia', $data->getGroups()->getGroups()[0]->getWinner()->getName());
+        $this->assertInstanceOf(Team::class, $data->getGroups()[0]->getWinner());
+        $this->assertSame('Russia', $data->getGroups()[0]->getWinner()->getName());
     }
 
     public function testRunnerupShouldBeATeam(): void
     {
         $data = $this->getParser('groupa_finished.json')->parse();
-        $this->assertInstanceOf(Team::class, $data->getGroups()->getGroups()[0]->getWinner());
-        $this->assertSame('Saudi Arabia', $data->getGroups()->getGroups()[0]->getRunnerup()->getName());
+        $this->assertInstanceOf(Team::class, $data->getGroups()[0]->getWinner());
+        $this->assertSame('Saudi Arabia', $data->getGroups()[0]->getRunnerup()->getName());
     }
 
     public function testGroupMatches(): void
     {
         $data = $this->getParser('notstarted.json')->parse();
-        $this->assertCount(6, $data->getGroups()->getGroups()[0]->getMatches());
-        $this->assertInstanceOf(GroupMatch::class, $data->getGroups()->getGroups()[0]->getMatches()[0]);
-        $this->assertSame($data->getGroups()->getGroups()[0]->getMatches()[0]->getGroup()->getName(), $data->getGroups()->getGroups()[0]->getName());
+        $this->assertCount(6, $data->getGroups()[0]->getMatches());
+        $this->assertInstanceOf(GroupMatch::class, $data->getGroups()[0]->getMatches()[0]);
+        $this->assertSame($data->getGroups()[0]->getMatches()[0]->getGroup()->getName(), $data->getGroups()[0]->getName());
     }
 
     public function testKnockoutMatch(): void
     {
         $data = $this->getParser('groupa_finished.json')->parse();
-        $this->assertSame('Round of 16', $data->getKnockoutRounds()->getKnockoutRounds()[0]->getName());
-        $this->assertSame('round_16', $data->getKnockoutRounds()->getKnockoutRounds()[0]->getId());
-        $match = $data->getKnockoutRounds()->getKnockoutRounds()[0]->getMatches()[0];
+        $this->assertSame('Round of 16', $data->getKnockoutRounds()[0]->getName());
+        $this->assertSame('round_16', $data->getKnockoutRounds()[0]->getId());
+        $match = $data->getKnockoutRounds()[0]->getMatches()[0];
         $this->assertSame(5, $match->getHomePenalty());
         $this->assertSame(4, $match->getAwayPenalty());
         $this->assertSame('home', $match->getWinner());
-        $this->assertSame($data->getKnockoutRounds()->getKnockoutRounds()[0]->getName(), $match->getKnockoutRound()->getName());
+        $this->assertSame($data->getKnockoutRounds()[0]->getName(), $match->getKnockoutRound()->getName());
     }
 
     public function testKnockouts(): void
     {
         $data = $this->getParser('notstarted.json')->parse();
-        $this->assertCount(5, $data->getKnockoutRounds()->getKnockoutRounds());
+        $this->assertCount(5, $data->getKnockoutRounds());
     }
 
     public function testInvalidFile(): void
@@ -102,7 +102,7 @@ class ParserTest extends TestCase
     public function testMatch(): void
     {
         $data = $this->getParser('notstarted.json')->parse();
-        $match = $data->getGroups()->getGroups()[0]->getMatches()[0];
+        $match = $data->getGroups()[0]->getMatches()[0];
 
         $this->assertSame(1, $match->getName());
         $this->assertSame('group', $match->getType());
@@ -125,7 +125,7 @@ class ParserTest extends TestCase
         $this->assertSame(1, $match->getMatchday());
 
 
-        $match = $data->getKnockoutRounds()->getKnockoutRounds()[0]->getMatches()[0];
+        $match = $data->getKnockoutRounds()[0]->getMatches()[0];
         $team = $match->getHomeTeam();
         $this->assertSame($team, $match->getSlackName($team));
     }

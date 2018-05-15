@@ -24,6 +24,11 @@ class Group
      */
     private $matches;
 
+    /**
+     * @var int
+     */
+    private $sorting;
+
     public function getName(): string
     {
         return $this->name;
@@ -77,6 +82,17 @@ class Group
         }
         unset($match);
         $this->matches = $matches;
+        return $this;
+    }
+
+    public function getSorting(): int
+    {
+        return $this->sorting;
+    }
+
+    public function setSorting(int $sorting): self
+    {
+        $this->sorting = $sorting;
         return $this;
     }
 }
