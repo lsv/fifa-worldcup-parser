@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace Lsv\FifaWorldcupParser;
 
-use App\Model;
+use Lsv\FifaWorldcupParser\Model;
 
 class Parser
 {

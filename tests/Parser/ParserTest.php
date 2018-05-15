@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Parser;
+namespace Lsv\FifaWorldcupParser\Tests\Parser;
 
-use App\Model\GroupMatch;
-use App\Model\Team;
-use App\Parser;
+use Lsv\FifaWorldcupParser\Model\GroupMatch;
+use Lsv\FifaWorldcupParser\Model\Team;
+use Lsv\FifaWorldcupParser\Parser;
 use PHPUnit\Framework\TestCase;
 
 class ParserTest extends TestCase

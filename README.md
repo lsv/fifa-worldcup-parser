@@ -4,7 +4,7 @@
 Usage
 -----
 
-Just run `$data = (new App\Parser)->parse();`, now `$data` will be a `App\Model\Data` object
+Just run `$data = (new Lsv\FifaWorldcupParser\Parser)->parse();`, now `$data` will be a `Lsv\FifaWorldcupParser\Model\Data` object
 
 Install
 -------
