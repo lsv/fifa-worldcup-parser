@@ -158,4 +158,11 @@ class ParserTest extends TestCase
         $this->assertSame('es', $channel->getIso2());
         $this->assertCount(1, $channel->getLang());
     }
+
+    public function testLive(): void
+    {
+        $parser = new Parser();
+        $data = $parser->parse();
+        $this->assertCount(32, $data->getTeams());
+    }
 }
